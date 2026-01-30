@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0b0c" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>CATV Calc</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- iOS home-screen icon -->
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="title">CATV Signal Loss Calculator</div>
+    <div class="subtitle">Offline Home-Screen App</div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <div class="row">
+        <label>Mode</label>
+        <select id="mode">
+          <option value="AT_TAP">Meter is AT current tap</option>
+          <option value="UPSTREAM">Meter is UPSTREAM start level</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <label>Frequency (MHz)</label>
+        <select id="freq">
+          <option value="250">250</option>
+          <option value="1000">1000</option>
+        </select>
+      </div>
+
+      <div class="grid2">
+        <div class="row">
+          <label>Meter @ 250 (dBmV)</label>
+          <input id="meter250" inputmode="decimal" value="34.5" />
+        </div>
+        <div class="row">
+          <label>Meter @ 1000 (dBmV)</label>
+          <input id="meter1000" inputmode="decimal" value="41" />
+        </div>
+      </div>
+
+      <div class="row">
+        <label>Meter pad (dB)</label>
+        <input id="pad" inputmode="decimal" value="20" />
+      </div>
+
+      <div class="grid2">
+        <div class="row">
+          <label>Cable type</label>
+          <select id="cable"></select>
+        </div>
+        <div class="row">
+          <label>Length (ft)</label>
+          <input id="length" inputmode="decimal" value="814" />
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="row">
+          <label>Current tap value (dB)</label>
+          <input id="tapVal" inputmode="decimal" value="4" />
+        </div>
+        <div class="row">
+          <label>Current tap THRU loss (dB)</label>
+          <input id="tapThru" inputmode="decimal" value="1.5" />
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="sectionTitle">Internal (mini-bridger)</div>
+      <div class="grid2">
+        <div class="row">
+          <label>Internal device</label>
+          <select id="internalPick"></select>
+        </div>
+        <div class="row btnRow">
+          <button id="addInternal" class="btn">Add</button>
+          <button id="clearInternal" class="btn btnGhost">Clear</button>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="stackList" id="internalList">(none)</div>
+        <div class="totals">Internal total: <span id="internalTotal">0.00</span> dB</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="sectionTitle">Field devices</div>
+      <div class="grid2">
+        <div class="row">
+          <label>Field device</label>
+          <select id="fieldPick"></select>
+        </div>
+        <div class="row btnRow">
+          <button id="addField" class="btn">Add</button>
+          <button id="clearField" class="btn btnGhost">Clear</button>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="stackList" id="fieldList">(none)</div>
+        <div class="totals">Field total: <span id="fieldTotal">0.00</span> dB</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="sectionTitle">Inline taps (THRU path)</div>
+      <div class="grid2">
+        <div class="row">
+          <label>Inline tap value</label>
+          <select id="inlineTapVal"></select>
+        </div>
+        <div class="row">
+          <label>Inline tap THRU loss (dB)</label>
+          <input id="inlineTapThru" inputmode="decimal" value="1.5" />
+        </div>
+      </div>
+      <div class="row btnRow">
+        <button id="addInline" class="btn">Add inline tap</button>
+        <button id="clearInline" class="btn btnGhost">Clear inline taps</button>
+      </div>
+
+      <div class="stack">
+        <div class="stackList" id="inlineList">(none)</div>
+        <div class="totals">Inline taps THRU total: <span id="inlineTotal">0.00</span> dB</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="row btnRow">
+        <button id="calcBtn" class="btn btnBig">CALCULATE</button>
+      </div>
+      <pre class="results" id="results">Enter values then tap CALCULATE.</pre>
+      <div class="hint">
+        Tip: Add to Home Screen in Safari. Offline works after first load (HTTPS required).
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
